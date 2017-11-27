@@ -26,11 +26,10 @@ $result = $conn->query($sql);
 
 if($result) 
 {
-    echo '<ul class="collection with-header">';
-	echo '<li class="collection-header"><h4>'.$libaliment.'</h4></li>';	
+    echo '<ul class="collection">';
     while($row = $result->fetch_assoc()) 
 	{	
-        echo '<li class="collection-item">'.$row["libaliment"].'</li>';
+        echo '<li class="collection-item z-depth-4"><a class="btn red">'.$row["libaliment"].'</a></li>';
 	}
     echo '</ul>';
 } 

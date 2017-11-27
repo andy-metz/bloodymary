@@ -4,9 +4,9 @@
 	$username ="root";
 	$password ="";
 	$db="myDB";
-//	$sql = "CREATE DATABASE IF NOT EXISTS myDB";
+	$sql = "CREATE DATABASE IF NOT EXISTS myDB";
 
-    include'Donnees.inc.php';
+    include'projet/Donnees.inc.php';
 
 	$conn = mysqli_connect($servername, $username, $password);
 
@@ -126,12 +126,12 @@ if (!mysqli_query($conn, $sql)) {
 //
 // Creation table ESTPERE + gestion erreur
 //
-//===============
+//=============== 
 
 $sql="CREATE TABLE IF NOT EXISTS ESTPERE(
 idAliment int ,
 id_SuperCat int,
-/*FOREIGN KEY(idAliment) REFERENCES ALIMENT(idAliment),    complété l'intégrité de la base*/
+/* FOREIGN KEY(idAliment) REFERENCES ALIMENT(idAliment),    complété l'intégrité de la base */
 CONSTRAINT alim_a_pour_fils PRIMARY KEY(idAliment, id_SuperCat)
 )
 ";
