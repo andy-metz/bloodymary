@@ -2,7 +2,7 @@
  <div class="card-panel red">
   <div class="row">
    <div class="col s3">			
-    <img src="images/site.jpg" alt="BloodyMary" width="250" height="100">
+    <img class="materialboxed" src="images/site.jpg" alt="BloodyMary" width="250">
   </div>
   <div class="container col s6">
     <a id="affichage_accueil" class="waves-effect waves-light btn">Accueil</a>
