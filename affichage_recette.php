@@ -3,8 +3,7 @@
 
 if(isset($_POST['librecette'])) {
 	$librecette = $_POST['librecette'];
-} else 				
-{
+} else {
 	$librecette = '';
 }
 

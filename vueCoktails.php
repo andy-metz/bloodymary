@@ -4,7 +4,7 @@
 		<?php include "vueListeAliments.php" ?>
 		</div>
 		<div id="liste_recettes" class="col s8 m8 l8">
-			titi
-		</div>'
+			<span>titi</span>
+		</div>
 	</div>
 </div>
