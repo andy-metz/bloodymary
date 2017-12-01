@@ -1,6 +1,7 @@
 <?php
 session_start();
 unset($_SESSION['aliment']);
+unset($_SESSION['hierarchie_aliment']);
 ?>
 <!doctype html>
 <html lang='fr'>
@@ -23,6 +24,7 @@ unset($_SESSION['aliment']);
   <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
+  <?php require 'vueAffichageRecette.php'; ?>
   <?php require 'header.php'; ?>
 
   <main class="page-main"> <!-- zone principale de la page -->

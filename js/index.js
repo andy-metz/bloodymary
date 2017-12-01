@@ -21,10 +21,19 @@
 				post({libaliment: $(this).text()});
 			});
 
+			$(".recette").click(function() {
+				post({librecette: $(this).text()});
+			});
+
+
 			$("#affichage_favoris").click(function() {});
 			$("#affichage_accueil").click(function() {});
 			$(".collection-item").click(function() {});
+			$(".breadcrumb").click(function() {});
+
 			$('.materialboxed').materialbox();
+    		$('.modal').modal();
+			$('.collapsible').collapsible();       		
 		}
 
 		// function that execute the post request and bind the event watcher if success to new DOM content
@@ -69,5 +78,7 @@
 		});	
     	*/
     	$('.materialboxed').materialbox();	
+    	$('.modal').modal();
+		$('.collapsible').collapsible();    	
 	});
 
