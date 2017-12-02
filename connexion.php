@@ -19,8 +19,24 @@
 			</form>
 		</div>
 	</form>
+	<button class="btn waves-effect waves-light" type="submit" name="action">Connexion
+		<i class="material-icons right">send</i>
+	</button> 
 	<?php
-		/*if(isset($_POST["login"]) && isset($_POST["mdp"])
-			$_SESSION["login"] = $_POST["login"];*/
+		/*
+		if(isset($_POST["login"]) && isset($_POST["mdp"])
+		{
+			$_SESSION["login"] = $_POST["login"];
+			
+			require "TestMDP.php";
+			
+			if($erreur = true)
+				echo "mot de passe invalide";
+			else
+				$_SESSION["mdp"] = $mdp;
+		}	
+		*/
+			
+		
 	?>
 </body>

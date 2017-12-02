@@ -93,11 +93,15 @@ try
 	idUtilisateur int(10)  AUTO_INCREMENT  PRIMARY KEY,
 	login VARCHAR(50) NOT NULL UNIQUE,     
 	mdp VARCHAR(50)  NOT NULL,
-	nom VARCHAR(50) NOT NULL,
-	prenom VARCHAR(50) NOT NULL,
-	adresse VARCHAR(50) NOT NULL,
-	cp VARCHAR(50) NOT NULL,
-	ville VARCHAR(50) NOT NULL
+	nom VARCHAR(50),
+	prenom VARCHAR(50),
+	sexe VARCHAR(5),
+	adresseMail VARCHAR(50),
+	dateNaissance VARCHAR(8),
+	adresse VARCHAR(50),
+	cp VARCHAR(5),
+	ville VARCHAR(50),
+	telephone VARCHAR(10)
 	)
 	";
 	$conn->exec($sql);
@@ -456,7 +460,6 @@ try
 
 	  return $liste_toutes_les_recettes;
 	}
-	getToutesLesrecettes();
 }
 catch(PDOException $e)
 {
@@ -482,7 +485,7 @@ try
 	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	$sql="DROP DATABASE myDBPDO";
+	//$sql="DROP DATABASE myDBPDO";
 	$conn->exec($sql);
 	echo "Database supprimée";
 }	
