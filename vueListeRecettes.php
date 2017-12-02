@@ -1,5 +1,5 @@
 <div>
-	<?= '<p>Coktails contenant '.$_SESSION['aliment'].'</p>' ?>
+	<?= '<h5 class="center">Coktails contenant '.$_SESSION['aliment'].'</h>' ?>
 </div>
 <div>
 

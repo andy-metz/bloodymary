@@ -6,7 +6,7 @@ if(isset($_POST['favori']))
 echo '  
 	<div id="modal_retire_recette" class="modal">
     <div class="modal-content">
-      <h4>Information</h4>
+      <h5 class="center">Information</h5>
       <p>'.$message_confirmation.'</p>
     </div>
     <div class="modal-footer">

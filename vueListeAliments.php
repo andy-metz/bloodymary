@@ -1,6 +1,6 @@
 <div>
 	<div>
-		<?= '<p>Aliments contenus dans '.$_SESSION['aliment'].'</p>' ?>
+		<?= '<h5 class="center">Aliments contenus dans '.$_SESSION['aliment'].'</h>' ?>
 	</div>	
 	<ul class="collection">
 		<?php
