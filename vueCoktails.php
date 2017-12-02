@@ -23,6 +23,7 @@ if(isset($_POST['libaliment'])) {
 if(isset($_POST['librecette'])) {
 	$_SESSION['recette_en_cours']=$_POST['librecette'];
 }
+
 $_SESSION['connected']=false;
 
 if(isset($_POST['favori']) && $_POST['favori']!="") 
@@ -30,14 +31,15 @@ if(isset($_POST['favori']) && $_POST['favori']!="")
 	if($_SESSION['connected'] == false)// on ajoute au tableau liste_favoris
 	{ 
 		$key = array_search($_POST['favori'], $_SESSION['liste_favoris']);	
-		if($key == true)
+		if($key === false)
 		{
-			$message_confirmation = $_POST['favori']." est déjà dans vos favoris";
+			array_push($_SESSION['liste_favoris'], $_POST['favori']);
+			$message_confirmation = $_POST['favori']." a été ajouté à vos favoris";			
+			asort($_SESSION['liste_favoris']);	
 		}
 		else
 		{
-			array_push($_SESSION['liste_favoris'], $_POST['favori']);
-			$message_confirmation = $_POST['favori']." a été ajouté à vos favoris";
+			$message_confirmation = $_POST['favori']." est déjà dans vos favoris";
 		}
 	}
 	else

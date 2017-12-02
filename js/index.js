@@ -16,6 +16,19 @@
 			post("vueCoktails.php",{},".page-main");
 		});
 
+		$("#affichage_favoris").click(function() {
+		// 	$.post("liste_recettes.php",
+		// 	{
+		// 		libaliment:'Aliment'
+		// 	},
+		// 	function(data, status){
+		// 		//$("<p></p>").text("Text."); 
+		// 		$(".page-main").html(data); 
+		// 	});
+		//
+			post("vueFavoris.php",{},".page-main");
+		});
+
 		var bindWatcher = function() {
 			$(".aliment").click(function() {
 				post("vueCoktails.php",{libaliment: $(this).text()},".page-main");
@@ -32,6 +45,12 @@
 				//alert($(this).text());				
 			});
 
+			$(".retirefavori").click(function() {
+				post("vueFavoris.php"/*"AjoutFavori.php*/,{favori: $(this).attr("data-recette")},".page-main"/*"#modal"*/);
+				$("#modal_retire_recette").modal('open');
+				//alert($(this).text());				
+			});
+
 			//$("#affichage_favoris").click(function() {});
 			$("#affichage_accueil").click(function() {});
 			$(".collection-item").click(function() {});
@@ -41,6 +60,7 @@
     		$('.modal').modal();
 			$('.collapsible').collapsible();  
 			$("#modal_ajout_recette").modal('open');
+			$("#modal_retire_recette").modal('open');			
 		}
 
 		// function that execute the post request and bind the event watcher if success to new DOM content
@@ -114,5 +134,6 @@
     	$('.modal').modal();
 		$('.collapsible').collapsible();  
 		$("#modal_ajout_recette").modal('open');
+		$("#modal_retire_recette").modal('open');		
 	});
 

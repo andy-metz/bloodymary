@@ -28,7 +28,7 @@ unset($_SESSION['hierarchie_aliment']);
 <div id="message">
  </div> 
   <main class="page-main"> <!-- zone principale de la page -->
-  <?php //require 'vueAccueil.php'; ?>
+  <?php require 'vueAccueil.php'; ?>
   </main>
 
   <?php require 'footer.php'; ?>
