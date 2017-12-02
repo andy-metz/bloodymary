@@ -32,7 +32,7 @@
 		
 		if($_POST["mdp"] != null)
 		{
-			if(preg_match("#[^a-zA-Z0-9]#",  $_POST["mdp"]) == 1)
+			if(preg_match("#^[a-zA-Z0-9]#",  $_POST["mdp"]) == 1)
 				$elementCorrect = "\$mdp";
 			else
 			{
@@ -43,7 +43,7 @@
 		else
 		{
 			$erreur == true;
-			$elementIncorrect = "login";
+			$elementIncorrect = "mdp";
 		}
 		
 		if(preg_match('#^[\x20-\x7E]{2}#', $_POST["nom"]) == 1)
@@ -77,7 +77,7 @@
 		
 		if($_POST["adresse"] != null)
 		{
-			if(preg_match("#^[0-9]{1,2} [' '] [a-z]* [' '] [A-Z]? [a-z]*#", $_GET["adresse"]) == 1)
+			if(preg_match("#^[0-9]{1,2} [' '] [a-z]* [' '] [A-Z]? [a-z]*#", $_POST["adresse"]) == 1)
 			{
 				$erreur == true;
 				$elementIncorrect = "adresse";
@@ -87,7 +87,7 @@
 		}
 		else if($_POST["cp"] != null)
 		{
-			if(preg_match("#^[0-9]{5}", $_GET["cp"]) == 1)
+			if(preg_match("#^[0-9]{5}", $_POST["cp"]) == 1)
 			{
 				$erreur == true;
 				$elementIncorrect = "cp";
@@ -95,9 +95,9 @@
 			else
 				$elementCorrect = "\$cp";
 		}
-		else if ($_GET["ville"] != null)
+		else if ($_POST["ville"] != null)
 		{
-			if(preg_match("#^[0-9]{5}", $_GET["cp"]) == 1)
+			if(preg_match("#^[0-9]{5}", $_POST["cp"]) == 1)
 			{
 				$erreur == true;
 				$elementIncorrect = "ville";
@@ -111,4 +111,6 @@
 			$elementIncorrect = "cp";
 		}
 	}
+	else
+		$erreur = true;
 ?>   
