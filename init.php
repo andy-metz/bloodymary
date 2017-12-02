@@ -4,12 +4,10 @@
 // Creation de la base de donnée myDBPDO //
 //																	  //
 //==============================//
-
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $db = "";
-
 try
 {
 	echo "<h2>Creation de la base de donnée myDBPDO</h2>";
@@ -32,7 +30,6 @@ catch(PDOException $e)
 {
     echo $sql."<br>". $e->getMessage();
 }
-
 $conn = null;
 ?>
 
@@ -42,44 +39,39 @@ $conn = null;
 // Creation des tables  //
 //									//
 //===============//
-
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $db = "myDBPDO";
-
 include'Donnees.inc.php';
-
 try
 {
 	echo "<h2>Création des tables</h2>";
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	//============================//
-	//																 //
-	// Creation table Recette + INDEX+ UTF8 //
-	//																 //
-	//============================//
-
+	
+	//=============================//
+	//																    //
+	// Creation table RECETTE + INDEX+ UTF8  //
+	//																    //
+	//=============================//
 	$sql ="CREATE TABLE IF NOT EXISTS RECETTE(
-	idRecette int NOT NULL AUTO_INCREMENT PRIMARY KEY,     
-	libRecette VARCHAR(100) NOT NULL,
+	idRecette int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	libRecette VARCHAR(100) NOT NULL UNIQUE,
 	ingredients VARCHAR(250) NOT NULL,
 	preparation VARCHAR(1000) NOT NULL
 	)";
 	$conn->exec($sql);
 	echo "Table Recette crée<br>";	
-
-	$sql="CREATE INDEX index_recette ON RECETTE (libRecette)";
-	$conn->exec($sql);
-
+	
 	$sql="ALTER TABLE RECETTE CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
-
-	//============================//
-	//																 //
-	// Creation table Aliment + INDEX + UTF8 //
-	//																 //
-	//============================//
+	$conn->exec($sql);
+	
+	//=============================//
+	//																    //
+	// Creation table ALIMENT + INDEX + UTF8 //
+	//																    //
+	//=============================//
 	
 	$sql="CREATE TABLE  IF NOT EXISTS ALIMENT(
 	idAliment int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -88,18 +80,15 @@ try
 	$conn->exec($sql);
 	echo "Table Aliment crée<br>";
 	
-	$sql="CREATE INDEX index_aliment on ALIMENT (LibAliment)";
-	$conn->exec($sql);
-	
 	$sql="ALTER TABLE ALIMENT CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 	$conn->exec($sql);
 	
-	//==============================//
-	//																	  //
-	// Creation table utilisateur + INDEX + UTF8 //
-	//																	  //
-	//==============================//
-
+	//================================//
+	//																	       //
+	// Creation table UTILISATEUR + INDEX + UTF8  //
+	//																	  	   //
+	//================================//
+	
 	$sql ="CREATE TABLE IF NOT EXISTS UTILISATEUR(
 	idUtilisateur int(10)  AUTO_INCREMENT  PRIMARY KEY,
 	login VARCHAR(50) NOT NULL UNIQUE,     
@@ -113,16 +102,13 @@ try
 	";
 	$conn->exec($sql);
 	echo "Table Utilisateur crée<br>";
-
-	$sql="CREATE INDEX index_utilisateur ON UTILISATEUR (idUtilisateur)";
-	$conn->exec($sql);
 	
 	$sql="ALTER TABLE UTILISATEUR CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 	$conn->exec($sql);
 	
 	//==================//
 	//										   //										   
-	// Creation table Contient  //
+	// Creation table CONTIENT//
 	//										   //
 	//==================//
 	
@@ -163,11 +149,11 @@ try
 	$conn->exec($sql);
 	echo "Table Enfant crée<br>";
 	
-	//================//
-	 //                                   //
-	// Creation table Favori  //
-	//                                    //
-	//================//
+	//=================//
+	//                            	         //
+	// Creation table FAVORI  //
+	//                                      //
+	//=================//
 	
 	$sql ="CREATE TABLE IF NOT EXISTS FAVORI(
 	idUser VARCHAR(100) NOT NULL REFERENCES UTILISATEUR(nom),     
@@ -177,14 +163,25 @@ try
 	$conn->exec($sql);
 	echo "Table Favori crée<br>";
 	
+	//=======================//
+	//										 	       	  //										   
+	//  Creation table APOURRECETTE  //
+	//										   	          //
+	//=======================//
 	
+	$sql="CREATE TABLE  IF NOT EXISTS APOURRECETTE(
+	idAliment int REFERENCES ALIMENT(idAliment),
+	idRecette int REFERENCES RECETTE(idRecette),
+	CONSTRAINT recette_a_pour_aliment PRIMARY KEY(idAliment, idRecette)
+	)";
+	$conn->exec($sql);
+	echo "Table APourPere crée<br>";
 }
 	
 catch(PDOException $e)
 {
     echo $sql."<br>". $e->getMessage();
 }
-
 $conn = null;
 ?>
 
@@ -194,85 +191,80 @@ $conn = null;
 // Ajout des données dan les tables  //
 //														   //		
 //=========================//
-
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $db = "myDBPDO";
-
 include'Donnees.inc.php';
-
 try
 {
 	echo "<h2>Ajout des éléments dans les tables</h2>";
 	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	//=========================//
-	//														   //
-	// Insertion des valeurs dans Recette //
-	//														   //
-	//=========================//
-	
-	$statement = $conn->prepare("INSERT IGNORE INTO RECETTE
-	(idRecette, libRecette, ingredients, preparation)
-	VALUES (null, :titre, :ingredients, :preparation)");
-	$statement->bindParam(':titre', $titre, PDO::PARAM_STR);
-	$statement->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
-	$statement->bindParam(':preparation', $preparation, PDO::PARAM_STR);
+	//==========================//
+	//														     //
+	// Insertion des valeurs dans RECETTE //
+	//														     //
+	//==========================//
 	
 	foreach($Recettes as $array_recette_courante)
 	{
-		$recette=array($array_recette_courante);
+		$recette = array($array_recette_courante);
 		
 		foreach($recette as $contenu)
 		{		
-			$titre="";
-			$ingredients="";
-			$preparation="";
+			$titre = "";
+			$ingredients = "";
+			$preparation = "";
 			
 			foreach($contenu as $libelle=>$info)
 			{
 				//$libelle représente le type d' information titre||ingredients||preparations
 				if(strcmp($libelle,'titre')==0)
 				{ // recuperation pour variable $titre
-					$titre=utf8_decode($info);								
+					$titre = utf8_decode($info);								
 				}
 				if(strcmp($libelle,'ingredients')==0)
 				{// recuperation pour variable $ingredients	
-					$ingredients=utf8_decode($info);
+					$ingredients = utf8_decode($info);
 				}	
 				if(strcmp($libelle,'preparation')==0)
 				{	// recuperation pour variable $preparation
-					$preparation=utf8_decode($info);
+					$preparation = utf8_decode($info);
 				}
 			}	
+			$statement = $conn->prepare("INSERT IGNORE INTO RECETTE
+			(idRecette, libRecette, ingredients, preparation)
+			VALUES (null, :titre, :ingredients, :preparation)");
+			$statement->bindParam(':titre', $titre, PDO::PARAM_STR);
+			$statement->bindParam(':ingredients', $ingredients, PDO::PARAM_STR);
+			$statement->bindParam(':preparation', $preparation, PDO::PARAM_STR);
 			$statement->execute();
 		}
 	}
 	echo "Insertion des valeurs dans Recette réussit<br>";
 	
-	//=========================//
-	//														   //
-	// Insertion des valeurs dans Aliment //
-	//														   //
-	//=========================//
+	//==========================//
+	//														     //
+	// Insertion des valeurs dans ALIMENT //
+	//														     //
+	//==========================//
 	
 	foreach($Hierarchie as $nom =>$description_categorie)
 	{
-		$statement = $conn->prepare("INSERT IGNORE INTO ALIMENT (idAliment, libAliment) VALUES(null, :nomAliment);");
-		$statement->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);
-		$nomAliment=utf8_decode($nom);  
-		
+		$nomAliment = utf8_decode($nom);  
+		$statement = $conn->prepare("INSERT IGNORE INTO ALIMENT (idAliment, libAliment) VALUES(null, :nomAliment)");
+		$statement->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);	
 		$statement->execute();
 	}
     echo "Insertion des valeurs dans Aliment réussit<br>";
-
-	//================================//
-	//														   				  //
-	// Insertion des valeurs dans Parent et Enfant //
-	//														   				  //
-	//================================//
+	
+	//==================================//
+	//														   				  	   //
+	//  Insertion des valeurs dans PARENT et ENFANT  //
+	//														   				  	   //
+	//==================================//
 	
 	foreach($Hierarchie as $nom =>$description_categorie)
 	{    
@@ -326,8 +318,6 @@ try
 				{ 
 					foreach($info_categorie as $nom_sp_categorie)
 					{		
-					
-						
 						$nom_sp_categorie= utf8_decode($nom_sp_categorie);
 						
 						$id_sp_cat = $conn->prepare("SELECT idAliment,libAliment
@@ -351,6 +341,97 @@ try
 	} 
 	echo "Insertion des valeurs dans Parent réussit<br>";
 	echo "Insertion des valeurs dans Enfant réussit<br>";
+	
+	//===========================//
+	//														       //
+	// Insertion des valeurs dans CONTIENT//
+	//														       //
+	//===========================//
+	
+	foreach($Recettes as $array_recette_courante) 
+	{
+		$recette = array($array_recette_courante);
+		
+		foreach($recette as $contenu)
+		{		
+			foreach($contenu as $libelle => $array_aliment_recette)
+			{//$libelle représente le type d' information titre||ingredients||preparations||titre
+			
+				if((strcmp($libelle,'titre')==0))
+				{ //recuperation pour variable $titre		  
+				$titre = utf8_decode($array_aliment_recette);		
+				$libRecette = $titre;	
+				
+				$id_recette = $conn->prepare("SELECT idRecette , libRecette
+				FROM  RECETTE 
+				WHERE libRecette = :libRecette");
+				$id_recette->bindParam(':libRecette', $libRecette, PDO::PARAM_STR);
+				$id_recette->execute();
+				
+				$res_id_recette = $id_recette->fetch(PDO::FETCH_ASSOC);
+				$id_recette_trouve = $res_id_recette['idRecette'];
+				}
+				if(strcmp($libelle,'index')==0)
+				{		
+					foreach($array_aliment_recette as $aliment_recette)
+					{
+						$libAliment =utf8_decode($aliment_recette);
+						
+						$id_aliment=$conn->prepare("SELECT idAliment , libAliment
+						FROM ALIMENT
+						WHERE libAliment=:libAliment");
+						$id_aliment->bindParam(':libAliment', $libAliment, PDO::PARAM_STR);
+						$id_aliment->execute();
+						
+						$res_id_aliment = $id_aliment->fetch(PDO::FETCH_ASSOC);						
+						$id_aliment_trouve = $res_id_aliment['idAliment'];
+						
+						$statement = $conn->prepare
+						("INSERT IGNORE INTO CONTIENT(idAliment,idRecette) VALUES(:id_aliment_trouve, :id_recette_trouve)");
+						$statement->bindParam(':id_aliment_trouve', $id_aliment_trouve, PDO::PARAM_INT);
+						$statement->bindParam(':id_recette_trouve', $id_recette_trouve, PDO::PARAM_INT);
+						$statement->execute();
+					}
+				}			
+			}
+		}	
+	}
+	echo "Insertion des valeurs dans Contient réussit<br>";
+	
+	//================================//
+	//														     			  //
+	//   Insertion des valeurs dans APOURRECETTE //
+	//														     	    	  //
+	//================================//
+	
+	$id_recette = $conn->prepare("SELECT idRecette FROM RECETTE");
+	$id_recette->execute();
+	$res_id_recette = $id_recette->fetchall(PDO::FETCH_COLUMN);
+
+	$id_aliment=$conn->prepare("SELECT C.idAliment FROM CONTIENT C, RECETTE R WHERE R.idRecette = C.idRecette");
+	$id_aliment->execute();
+	$res_id_aliment = $id_aliment->fetchall(PDO::FETCH_COLUMN);
+	
+	$id_aliment_parent=$conn->prepare("SELECT P.idAliment FROM CONTIENT C, PARENT P WHERE  C.idAliment = P.idAliment");
+	$id_aliment_parent->execute();
+	$res_id_aliment_parent = $id_aliment_parent->fetchall(PDO::FETCH_COLUMN);
+	
+	foreach($res_id_recette as $res_id_rec => $id_recette_trouve)
+	{
+		foreach($res_id_aliment as $res_id_alim => $id_aliment_trouve)
+		{	
+			foreach($res_id_aliment_parent as $res_id_alim_parent => $id_aliment_parent_trouve)
+			{
+			echo $id_recette_trouve;
+			$statement = $conn->prepare
+			("INSERT IGNORE INTO APOURRECETTE(idAliment,idRecette) VALUES(:id_aliment_parent_trouve, :id_recette_trouve)");
+			$statement->bindParam(':id_aliment_parent_trouve', $id_aliment_parent_trouve, PDO::PARAM_INT);
+			$statement->bindParam(':id_recette_trouve', $id_recette_trouve, PDO::PARAM_INT);
+			$statement->execute();
+			}
+		}
+	}
+	echo "Insertion des valeurs dans APourParent réussit<br>";
 }
 catch(PDOException $e)
 {
@@ -365,7 +446,6 @@ $conn = null;
 // Supression de la base de donnée myDBPDO //
 //																 		  //
 //================================//
-
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -386,6 +466,5 @@ catch(PDOException $e)
 {
     echo $sql."<br>". $e->getMessage();
 }
-
 $conn = null;
 ?>
