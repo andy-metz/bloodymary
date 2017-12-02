@@ -24,9 +24,9 @@ unset($_SESSION['hierarchie_aliment']);
   <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
-  <?php require 'vueAffichageRecette.php'; ?>
   <?php require 'header.php'; ?>
-
+<div id="message">
+ </div> 
   <main class="page-main"> <!-- zone principale de la page -->
   <?php //require 'vueAccueil.php'; ?>
   </main>

@@ -13,31 +13,29 @@
 				$rec = getRecette($recette['librecette']);
 				foreach($rec as $ligne){			
 					echo '<div class="collapsible-body">';
-echo '</div class="raw">';
-
-	$path_photo = str_replace(" ", "_", $recette['librecette']);					
-	echo "<img class='materialboxed left' src='images/".$path_photo.".jpg' alt='cocktail' style='width:100px;height:100px;'>";
-					echo '<a class="btn-floating btn-large waves-effect waves-light red right"><i class="material-icons">add_shopping_cart</i></a>';
-
-echo '</div>';
+					echo '<a class="btn-floating btn-large waves-effect waves-light red right favori" data-recette="'. $recette['librecette'].'"><i class="material-icons">add_shopping_cart</i></a>';
+					$path_photo = str_replace(" ", "_", $recette['librecette']);					
+					//echo '<img class="materialboxed" src="images/'.$path_photo.'.jpg" alt="" style="width:100px;height:100px;">';						
 					echo '<span>';
-					
-	$ingredients = str_replace("|", "<br>", $ligne['composition']);
-	echo $ingredients."<br><br>";    
-	echo $ligne['preparation'].'</span>';
-      
-
-
-
-					echo '</div>';
+					echo '<div class="row">';
+				        echo '<div class="col s12 m6">';
+				          echo '<div class="card blue-grey darken-1">';
+				            echo '<div class="card-content white-text">';
+				              echo '<span class="card-title">Ingrédients</span>';
+									$ingredients = str_replace("|", "<br>", $ligne['composition']);
+									echo $ingredients."<br><br>";  
+				            echo '</div>';
+				          echo '</div>';
+				        echo '</div>';
+				      echo '</div>';
+					echo $ligne['preparation'];
+					echo '</span>';
+					echo'</div>';						
 					echo '</li>';
 				}			
 			}
 		}
-	?>
+		?>
 	</ul>
-
-
-
 </div>
 
