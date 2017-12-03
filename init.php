@@ -407,7 +407,6 @@ try
 	//   Insertion des valeurs dans APOURRECETTE   //
 	//														                //
 	//=============================//
-
 	function getBdd() {
 	  $bdd = new PDO('mysql:host=localhost;dbname=mydbpdo;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 	  return $bdd;
@@ -416,7 +415,6 @@ try
 	function insertIgnoreDansAlimentEstDansRecette($idaliment, $idrecette){
 	  $bdd = getBdd();
 	  $bdd->query('insert ignore into apourrecette (idaliment, idrecette) VALUES('.$idaliment.', '.$idrecette.');');
-
 	}
 	
 	function getCompositionRecette($idrecette) {
@@ -424,10 +422,8 @@ try
 	  $composition = $bdd->query('select c.idAliment as idaliment, c.idRecette as idrecette' 
 	   .' from contient c'
 	   .' where c.idrecette= "'.$idrecette.'"');
-
 	  return $composition;    
 	  }
-
 	  function getPere($idaliment) {
 	  $bdd = getBdd();
 	  $pere = $bdd->query('select p.id_SuperCat as idaliment' 
@@ -435,7 +431,6 @@ try
 	   .' where p.idAliment= "'.$idaliment.'"');
 	  return $pere;    
 	  }
-
 	function getToutesLesrecettes() {
 	  $bdd = getBdd();
 	  echo 'connexion reussie<br>';
@@ -448,7 +443,6 @@ try
 		$aliments_contenus = getCompositionRecette($recette['idrecette']);
 		// foreach ($aliments_contenus as $composant)
 	 //  		echo 'compo:'.$composant['idrecette'].'<br>';
-
 		foreach ($aliments_contenus as $composant) {
 		  $idrecette = $composant['idrecette'];
 		  $idaliment = $composant['idaliment'];
@@ -463,14 +457,10 @@ try
 		  }
 		}
 	  }
-
 	 //return $liste_toutes_les_recettes;
 	}
-<<<<<<< HEAD
-	getToutesLesrecettes();
-	echo "Insertion des valeurs dans Contient réussit<br>";
-=======
->>>>>>> d176778fb36c8047882533f4e41543b344762d61
+	//getToutesLesrecettes();
+	echo "Insertion des valeurs dans APOURRECETTE réussit<br>";
 }
 catch(PDOException $e)
 {
@@ -478,36 +468,13 @@ catch(PDOException $e)
 }
 $conn = null;
 ?>
-
 <?php
 //============================//
 //																	  //
 // Supression de la base de donnée myDBPDO //
 //																 	  //
 //============================//
-<<<<<<< HEAD
-// $servername = "127.0.0.1";
-// $username = "root";
-// $password = "";
-// $db = "myDBPDO";
-	
-// try
-// {
-// 	echo "<h2>Supression de la base de donnée PDO</h2>";
-// 	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
-// 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-// 	$sql="DROP DATABASE myDBPDO";
-// 	$conn->exec($sql);
-// 	echo "Database supprimée";
-// }	
-	
-// catch(PDOException $e)
-// {
-//     echo $sql."<br>". $e->getMessage();
-// }
-// $conn = null;
-=======
+
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -519,8 +486,8 @@ try
 	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	//$sql="DROP DATABASE myDBPDO";
-	$conn->exec($sql);
+	$sql="DROP DATABASE myDBPDO";
+	//$conn->exec($sql);
 	echo "Database supprimée";
 }	
 	
@@ -529,5 +496,4 @@ catch(PDOException $e)
     echo $sql."<br>". $e->getMessage();
 }
 $conn = null;
->>>>>>> d176778fb36c8047882533f4e41543b344762d61
 ?>

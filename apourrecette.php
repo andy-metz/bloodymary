@@ -66,7 +66,7 @@
 	  	}
 	  }
 
-
+ini_set('max_execution_time', 60);
 remplitapourrecette();
 echo "Insertion des valeurs dans Contient réussit<br>";
 ?>

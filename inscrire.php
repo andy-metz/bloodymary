@@ -8,12 +8,12 @@
 			<div class="row">
 				<div class="input-field col s2">
 					<i class="material-icons prefix">account_circle</i>
-					<input id="login" type="text" name="login"
+					<input id="login" type="text" name="login" required="required" 
 						   value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>">
 					<label for="login">Login *</label>
 				</div>
 				<div class="input-field col s2">
-					<input type="text" name="mdp"
+					<input type="text" name="mdp" required="required" 
 						   value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>">
 					<label for="mdp">Mot de passe *</label>
 				</div>
@@ -33,11 +33,11 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s2">
-					  <input name="sexe" type="radio" id="homme" value="Homme"
-							<?php echo (isset($_POST['sexe'])?$_POST['sexe']:''); ?>/>
+					  <input name="sexe" type="radio" id="homme" 
+						value="<?php echo (isset($_POST['sexe'])?$_POST['sexe'] = "Homme": null); ?>"/>
 					  <label for="homme">Homme</label>
-					  <input name="sexe" type="radio" id="femme" value="Femme"
-						<?php echo (isset($_POST['sexe'])?$_POST['sexe']:''); ?>/>
+					  <input name="sexe" type="radio" id="femme" 
+						value="<?php echo (isset($_POST['sexe'])?$_POST['sexe'] = "Femme": null); ?>" />
 					  <label for="femme">Femme</label>
 				</div>
 			</div>
@@ -46,31 +46,31 @@
 				<div class="input-field col s4">
 				<i class="material-icons prefix">mail_outline</i>
 					<input type="text" name="adresseMail"
-						   value="<?php echo (isset($_POST['adresseMail'])?$_POST['adresseMail']:''); ?>">
+						   value="<?php echo (isset($_POST['adresseMail'])?$_POST['adresseMail']:null); ?>">
 					<label for="adresseMail" data-error="wrong" data-success="right">Adresse Email</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s2">
-					<input placeholder="xx/xx/xxxx" type="text" name="dateNaissance"
-						   value="<?php echo (isset($_POST['dateNaissance'])?$_POST['dateNaissance']:''); ?>">
-					<label for="dateNaissance">Date de Naissance</label>
+					// <label>Date Naissance</label><br>
+					<input type="date" name="dateNaissance"
+						   value="<?php echo (isset($_POST['dateNaissance'])?$_POST['dateNaissance']:null); ?>">
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s2">
 					<input type="text" name="adresse"
-						   value="<?php echo (isset($_POST['adresse'])?$_POST['adresse']:''); ?>">
+						   value="<?php echo (isset($_POST['adresse'])?$_POST['adresse']:null); ?>">
 						   <label for="adresse">Adresse</label>
 				</div>
 				<div class="input-field col s2">
 					<input type="text" name="cp"
-						   value="<?php echo (isset($_POST['cp'])?$_POST['cp']:''); ?>">
+						   value="<?php echo (isset($_POST['cp'])?$_POST['cp']: null); ?>">
 						   <label for="cp">Code Postal</label> 
 				</div>
 				<div class="input-field col s2">
 					<input type="text" name="ville"
-						   value="<?php echo (isset($_POST['ville'])?$_POST['ville']:''); ?>">
+						   value="<?php echo (isset($_POST['ville'])?$_POST['ville']: null); ?>">
 						   <label for="ville">Ville</label>
 				</div>
 			</div>
@@ -78,15 +78,15 @@
 				<div class="input-field col s2">
 					<i class="material-icons prefix">phone</i>
 					<input type="text" name="telephone"
-							   value="<?php echo (isset($_POST['telephone'])?$_POST['telephone']:''); ?>">
+							   value="<?php echo (isset($_POST['telephone'])?$_POST['telephone']:null); ?>">
 					<label for="telephone">Telephone</label>
 				</div>
 			</div>
 		</form>
 	</div>
-	<button class="btn waves-effect waves-light" type="submit" name="action">Valider
+	<button class="btn waves-effect waves-light" type="submit" name="submit">Valider
 		<i class="material-icons right">send</i>
-  </button> 
+	</button> 
 </form>
 
 <?php
