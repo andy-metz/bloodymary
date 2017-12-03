@@ -161,8 +161,8 @@ try
 	
 	$sql ="CREATE TABLE IF NOT EXISTS FAVORI(
 	idUser VARCHAR(100) NOT NULL REFERENCES UTILISATEUR(nom),     
-	libRecette VARCHAR(200) NOT NULL REFERENCES RECETTE(libRecette),
-	CONSTRAINT user_a_pour_favori PRIMARY KEY (idUser,libRecette) 
+	idRecette VARCHAR(200) NOT NULL REFERENCES RECETTE(idRecette),
+	CONSTRAINT user_a_pour_favori PRIMARY KEY (idUser,idRecette) 
 	)";
 	$conn->exec($sql);
 	echo "Table Favori crée<br>";

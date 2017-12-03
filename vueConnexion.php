@@ -20,7 +20,7 @@
 </head>
 <body>
   <main class="page-main"> <!-- zone principale de la page -->
-  <?php require 'inscrire.php'; ?>
+  <?php require 'connexion.php';?>
   </main>
 </body>
 </html>
