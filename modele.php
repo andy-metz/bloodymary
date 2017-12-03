@@ -4,9 +4,9 @@
 function getListeAliments($libAliment) {
   $bdd = getBdd();
   $liste_aliments = $bdd->query('select af.libaliment as libaliment' 
-  	.' from aliment af, aliment a, estfils f'
-  	.' where f.idaliment = a.idaliment and a.libaliment ="'.$libAliment.'"'
-  	.' and f.id_souscat = af.idaliment'
+  	.' from aliment af, aliment a, enfant e'
+  	.' where e.idaliment = a.idaliment and a.libaliment ="'.$libAliment.'"'
+  	.' and e.id_souscat = af.idaliment'
   	.' order by af.libaliment');
   return $liste_aliments;
 }
@@ -32,7 +32,7 @@ function getListerecettes($libAliment) {
    .' where r.idrecette = c.idrecette'
    .' and a.idaliment = c.idaliment'
     .' and a.libaliment = "'.$libAliment.'"'
-   .' order by a.libaliment');
+   .' order by a.libaliment');  
 
   // on va parcourir toutes les recettes et pour chaque composant de la recette on l'ajoute à la table AlimentEstDansRecette
 
@@ -110,7 +110,7 @@ function updatListeFavorisRecette($libuser, $liste_favori) {
 // Effectue la connexion à la BDD
 // Instancie et renvoie l'objet PDO associé
 function getBdd() {
-  $bdd = new PDO('mysql:host=localhost;dbname=mydb;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  $bdd = new PDO('mysql:host=localhost;dbname=mydbpdo;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   return $bdd;
 }
 ?>

@@ -471,25 +471,25 @@ $conn = null;
 // Supression de la base de donnée myDBPDO //
 //																 	  //
 //============================//
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$db = "myDBPDO";
+// $servername = "127.0.0.1";
+// $username = "root";
+// $password = "";
+// $db = "myDBPDO";
 	
-try
-{
-	echo "<h2>Supression de la base de donnée PDO</h2>";
-	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// try
+// {
+// 	echo "<h2>Supression de la base de donnée PDO</h2>";
+// 	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+// 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	$sql="DROP DATABASE myDBPDO";
-	$conn->exec($sql);
-	echo "Database supprimée";
-}	
+// 	$sql="DROP DATABASE myDBPDO";
+// 	$conn->exec($sql);
+// 	echo "Database supprimée";
+// }	
 	
-catch(PDOException $e)
-{
-    echo $sql."<br>". $e->getMessage();
-}
-$conn = null;
+// catch(PDOException $e)
+// {
+//     echo $sql."<br>". $e->getMessage();
+// }
+// $conn = null;
 ?>

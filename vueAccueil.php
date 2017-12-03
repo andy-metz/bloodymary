@@ -3,7 +3,7 @@
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
               <span class="card-title center">Bienvenue sur Bloody Mary</span>
-              <span class="card-title center">Ce que vous pouvez faire sur ce site</span>
+              <span class="card-title center">Ce que vous pouvez faire sur ce site?</span>
               <ul style="list-style-type:disc">
 	              <li> Parcourir une hiérarchie d'aliments (bouton "COKTAILS")</li>
 	              <li> Pour chaque aliment ainsi que pour les ascendants de cet aliments, vous pourrez voir la liste des coktails correspondants</li>
@@ -14,7 +14,7 @@
                 <li> Vous pourrez supprimer alors, un de vos coktail favori de la liste en cliquant sur le bouton correspondant</li>
                 <li> Vos coktails favoris sont sauvegardés le temps de votre session à moins que vous vous incriviez sur le site en cliquant sur le bouton "CONNEXION"</li>
               </ul>	
-              <span class="card-title center">Merci d'être passé sur Bloody Mary, Enjoy!</span>
+              <span class="card-title center">Merci de visiter Bloody Mary, Enjoy!</span>
             </div>
             <div class="card-action">
               <a href="#" onclick="$('#affichage_coktails').click()">Commencer</a>
