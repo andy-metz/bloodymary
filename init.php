@@ -1,9 +1,9 @@
 <?php
-//===========================//
-//																   //
-// Creation de la base de donnée myDBPDO  //
-//																   //
-//===========================//
+//===========================
+//																   
+// Creation de la base de donnée myDBPDO  
+//																   
+//===========================
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -34,11 +34,11 @@ $conn = null;
 ?>
 
 <?php
-//=============//
-//								  //
-// Creation des tables  //
-//								  //
-//=============//
+//=============
+//								  
+// Creation des tables  
+//								  
+//=============
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -50,11 +50,11 @@ try
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	//===========================//
-	//																    //
-	// Creation table RECETTE + INDEX+ UTF8    //
-	//																    //
-	//===========================//
+	//================
+	//																    
+	// Creation table RECETTE 
+	//																   
+	//================
 	$sql ="CREATE TABLE IF NOT EXISTS RECETTE(
 	idRecette int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	libRecette VARCHAR(100) NOT NULL UNIQUE,
@@ -67,11 +67,11 @@ try
 	$sql="ALTER TABLE RECETTE CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 	$conn->exec($sql);
 	
-	//===========================//
-	//																    //
-	// Creation table ALIMENT + INDEX + UTF8   //
-	//																    //
-	//===========================//
+	//================
+	//									
+	// Creation table ALIMENT
+	//										
+	//================
 	
 	$sql="CREATE TABLE  IF NOT EXISTS ALIMENT(
 	idAliment int NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -83,11 +83,11 @@ try
 	$sql="ALTER TABLE ALIMENT CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 	$conn->exec($sql);
 	
-	//=============================//
-	//																	     //
-	// Creation table UTILISATEUR + INDEX + UTF8  //
-	//																	  	 //
-	//=============================//
+	//===================
+	//																	     
+	// Creation table UTILISATEUR 
+	//																	  	 
+	//===================
 	
 	$sql ="CREATE TABLE IF NOT EXISTS UTILISATEUR(
 	idUtilisateur int(10)  AUTO_INCREMENT  PRIMARY KEY,
@@ -110,11 +110,11 @@ try
 	$sql="ALTER TABLE UTILISATEUR CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 	$conn->exec($sql);
 	
-	//=================//
-	//								            //										   
-	// Creation table CONTIENT   //
-	//								    	    //
-	//=================//
+	//=================
+	//								            									   
+	// Creation table CONTIENT   
+	//								    	    
+	//=================
 	
 	$sql="CREATE TABLE  IF NOT EXISTS CONTIENT(
 	idAliment int REFERENCES ALIMENT(idAliment),
@@ -124,11 +124,11 @@ try
 	$conn->exec($sql);
 	echo "Table Contient crée<br>";
 	
-	//===============//
-	//							       	   //
-	// Creation table PARENT  //
-	//									   //
-	//===============//
+	//===============
+	//							       	   
+	// Creation table PARENT  
+	//									   
+	//===============
 	
 	$sql="CREATE TABLE IF NOT EXISTS PARENT(
 	idAliment int ,
@@ -139,11 +139,11 @@ try
 	$conn->exec($sql);
 	echo "Table Parent crée<br>";
 	
-	//================//
-	//								  		 //	
-	// Creation table ENFANT   //
-	//								  		 //
-	//================//
+	//================
+	//								  		 
+	// Creation table ENFANT   
+	//								  		 
+	//================
 	
 	$sql="CREATE TABLE IF NOT EXISTS ENFANT(
 	idAliment int REFERENCES ALIMENT(idAliment),
@@ -153,11 +153,11 @@ try
 	$conn->exec($sql);
 	echo "Table Enfant crée<br>";
 	
-	//===============//
-	//                            	 	   //
-	// Creation table FAVORI  //
-	//                                    //
-	//===============//
+	//===============
+	//                            	 	   
+	// Creation table FAVORI 
+	//                                    
+	//===============
 	
 	$sql ="CREATE TABLE IF NOT EXISTS FAVORI(
 	idUser VARCHAR(100) NOT NULL REFERENCES UTILISATEUR(nom),     
@@ -167,11 +167,11 @@ try
 	$conn->exec($sql);
 	echo "Table Favori crée<br>";
 	
-	//=====================//
-	//										 	 	     //										   
-	//  Creation table APOURRECETTE   //
-	//										   	         //
-	//=====================//
+	//=====================
+	//										 	 	     								   
+	//  Creation table APOURRECETTE   
+	//										   	         
+	//=====================
 	
 	$sql="CREATE TABLE  IF NOT EXISTS apourrecette(
 	idAliment int REFERENCES ALIMENT(idAliment),
@@ -190,11 +190,11 @@ $conn = null;
 ?>
 
 <?php
-//======================//
-//										 	    	   //
-// Ajout des données dan les tables  //
-//													   //		
-//======================//
+//======================
+//										 	    	   
+// Ajout des données dan les tables  
+//													   	
+//======================
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -206,11 +206,11 @@ try
 	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	//=======================//
-	//												     	  //
-	// Insertion des valeurs dans RECETTE  //
-	//													      //
-	//=======================//
+	//=======================
+	//												     	  
+	// Insertion des valeurs dans RECETTE  
+	//													     
+	//=======================
 	
 	foreach($Recettes as $array_recette_courante)
 	{
@@ -249,11 +249,11 @@ try
 	}
 	echo "Insertion des valeurs dans Recette réussit<br>";
 	
-	//=======================//
-	//												   		  //
-	// Insertion des valeurs dans ALIMENT  //
-	//												 		   //
-	//=======================//
+	//=======================
+	//												   		  
+	// Insertion des valeurs dans ALIMENT  
+	//												 		   
+	//=======================
 	
 	foreach($Hierarchie as $nom =>$description_categorie)
 	{
@@ -264,11 +264,11 @@ try
 	}
     echo "Insertion des valeurs dans Aliment réussit<br>";
 	
-	//==============================//
-	//														   	  	   		   //
-	//  Insertion des valeurs dans PARENT et ENFANT  //
-	//														   		  		   //
-	//==============================//
+	//==============================
+	//														   	  	   		   
+	//  Insertion des valeurs dans PARENT et ENFANT  
+	//														   		  		   
+	//==============================
 	
 	foreach($Hierarchie as $nom =>$description_categorie)
 	{    
@@ -346,11 +346,11 @@ try
 	echo "Insertion des valeurs dans Parent réussit<br>";
 	echo "Insertion des valeurs dans Enfant réussit<br>";
 	
-	//========================//
-	//													  		 //
-	// Insertion des valeurs dans CONTIENT  //
-	//													 	     //
-	//========================//
+	//========================
+	//													  		 
+	// Insertion des valeurs dans CONTIENT  
+	//													 	     
+	//========================
 	
 	foreach($Recettes as $array_recette_courante) 
 	{
@@ -402,11 +402,11 @@ try
 	}
 	echo "Insertion des valeurs dans Contient réussit<br>";
 	
-	//=============================//
-	//													   		            //
-	//   Insertion des valeurs dans APOURRECETTE   //
-	//														                //
-	//=============================//
+	//=============================
+	//													   		            
+	//   Insertion des valeurs dans APOURRECETTE   
+	//														                
+	//=============================
 	function getBdd() {
 	  $bdd = new PDO('mysql:host=localhost;dbname=mydbpdo;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 	  return $bdd;
@@ -460,7 +460,7 @@ try
 	 //return $liste_toutes_les_recettes;
 	}
 	//getToutesLesrecettes();
-	
+	echo "Insertion des valeurs dans APOURRECETTE réussit<br>";
 }
 catch(PDOException $e)
 {
@@ -469,11 +469,11 @@ catch(PDOException $e)
 $conn = null;
 ?>
 <?php
-//============================//
-//															  //
-// Supression de la base de donnée myDBPDO //
-//																 	  //
-//============================//
+//============================
+//															  
+// Supression de la base de donnée myDBPDO 
+//																 	  
+//============================
 
 $servername = "127.0.0.1";
 $username = "root";
