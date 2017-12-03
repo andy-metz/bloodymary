@@ -11,6 +11,7 @@
 		
 		$login = $_POST["login"];
 		$mdp = $_POST["mdp"];
+		$mdp = md5($mdp);
 		$nom = $_POST["nom"];
 		$prenom = $_POST["prenom"];
 		$sexe = $_POST["sexe"];

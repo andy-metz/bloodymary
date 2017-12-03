@@ -1,6 +1,6 @@
 <?php
 	//fichier qui vérifie le formulaire
-//	require 'verifFormulaire.php';
+	require 'verifFormulaire.php';
 ?>
 <form method="post" action=#>
 	<div class="row">
@@ -52,7 +52,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s2">
-					<input type="text" name="dateNaissance"
+					<input placeholder="xx/xx/xxxx" type="text" name="dateNaissance"
 						   value="<?php echo (isset($_POST['dateNaissance'])?$_POST['dateNaissance']:''); ?>">
 					<label for="dateNaissance">Date de Naissance</label>
 				</div>
@@ -85,20 +85,26 @@
 		</form>
 	</div>
 	<button class="btn waves-effect waves-light" type="submit" name="action">Valider
-    <i class="material-icons right">send</i>
+		<i class="material-icons right">send</i>
   </button> 
 </form>
 
 <?php
-/*	if($erreur == true)
+	if($erreur == true)
 	{
 		echo "erreur";
 	}
 	else
-	{*/
+	{
 		//Si pas de pb inclusion du fichier qui inscrit le client dans la base de donnée
 		if(isset($_POST))
-		{require 'InscrireClient.php';
-		echo "Inscription réussit";}
-	//}
+		{
+			require 'InscrireClient.php';
+			echo "Inscription réussit";
+		}
+		else
+		{
+			echo "veuillez remplir le formulaire";
+		}
+	}
 ?>

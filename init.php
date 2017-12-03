@@ -93,11 +93,15 @@ try
 	idUtilisateur int(10)  AUTO_INCREMENT  PRIMARY KEY,
 	login VARCHAR(50) NOT NULL UNIQUE,     
 	mdp VARCHAR(50)  NOT NULL,
-	nom VARCHAR(50) NOT NULL,
-	prenom VARCHAR(50) NOT NULL,
-	adresse VARCHAR(50) NOT NULL,
-	cp VARCHAR(50) NOT NULL,
-	ville VARCHAR(50) NOT NULL
+	nom VARCHAR(50),
+	prenom VARCHAR(50),
+	sexe VARCHAR(5),
+	adresseMail VARCHAR(50),
+	dateNaissance VARCHAR(8),
+	adresse VARCHAR(50),
+	cp VARCHAR(5),
+	ville VARCHAR(50),
+	telephone VARCHAR(10)
 	)
 	";
 	$conn->exec($sql);
@@ -462,8 +466,11 @@ try
 
 	 //return $liste_toutes_les_recettes;
 	}
+<<<<<<< HEAD
 	getToutesLesrecettes();
 	echo "Insertion des valeurs dans Contient réussit<br>";
+=======
+>>>>>>> d176778fb36c8047882533f4e41543b344762d61
 }
 catch(PDOException $e)
 {
@@ -478,6 +485,7 @@ $conn = null;
 // Supression de la base de donnée myDBPDO //
 //																 	  //
 //============================//
+<<<<<<< HEAD
 // $servername = "127.0.0.1";
 // $username = "root";
 // $password = "";
@@ -499,4 +507,27 @@ $conn = null;
 //     echo $sql."<br>". $e->getMessage();
 // }
 // $conn = null;
+=======
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$db = "myDBPDO";
+	
+try
+{
+	echo "<h2>Supression de la base de donnée PDO</h2>";
+	$conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+	//$sql="DROP DATABASE myDBPDO";
+	$conn->exec($sql);
+	echo "Database supprimée";
+}	
+	
+catch(PDOException $e)
+{
+    echo $sql."<br>". $e->getMessage();
+}
+$conn = null;
+>>>>>>> d176778fb36c8047882533f4e41543b344762d61
 ?>
