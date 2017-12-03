@@ -1,26 +1,34 @@
-<!doctype html>
-<html lang='fr'>
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Site de coktails">
-  <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-  <meta name="author" content="Coco&ded">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-  <link type="text/css" rel="stylesheet" href="css/index.css" media="screen,projection"/>
-  <!--Let browser know website is optimized for mobile-->
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-</head>
-<body>
-  <main class="page-main"> <!-- zone principale de la page -->
-  <?php require 'connexion.php';?>
-  </main>
-</body>
-</html>
+	<form method="post" action=#>
+		<div class="row">
+			<form class="col s8">
+				<div class="row">
+					<div class="input-field col s2">
+						<input id="login" type="text" name="login"
+							   value="<?php echo (isset($_POST['login'])?$_POST['login']:''); ?>">
+						<label for="login">Login</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s2">
+						<input type="text" name="mdp"
+							   value="<?php echo (isset($_POST['mdp'])?$_POST['mdp']:''); ?>">
+						<label for="mdp">Mot de passe</label>
+					</div>
+				</div> 
+			</form>
+		</div>
+	</form>
+	<button class="btn waves-effect waves-light" type="submit" name="action">Connexion
+		<i class="material-icons right">send</i>
+	</button> 
+	<?php
+		if(isset($_POST["login"]) && isset($_POST["mdp"])
+		{
+			require "TestMDP.php";
+			if($erreur = false)
+			{
+				$_SESSION["login"] = $_POST["login"];
+				//ajout de la fonction pour ajouter dans favori
+			}		
+		}	
+	?>
