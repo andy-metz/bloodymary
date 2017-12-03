@@ -459,7 +459,9 @@ try
 	  }
 	 //return $liste_toutes_les_recettes;
 	}
-	//getToutesLesrecettes();
+	
+	ini_set('max_execution_time', 60);
+	getToutesLesrecettes();
 	echo "Insertion des valeurs dans APOURRECETTE réussit<br>";
 }
 catch(PDOException $e)
