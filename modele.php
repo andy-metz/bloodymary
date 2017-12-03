@@ -28,7 +28,7 @@ function getListeAliments($libAliment) {
 function getListerecettes($libAliment) {
   $bdd = getBdd();
   $liste_recettes = $bdd->query('select r.librecette as librecette' 
-   .' from recette r, contient c, aliment a'
+   .' from recette r, apourrecette c, aliment a'
    .' where r.idrecette = c.idrecette'
    .' and a.idaliment = c.idaliment'
     .' and a.libaliment = "'.$libAliment.'"'

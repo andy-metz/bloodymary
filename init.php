@@ -411,7 +411,7 @@ try
 	
 	function insertIgnoreDansAlimentEstDansRecette($idaliment, $idrecette){
 	  $bdd = getBdd();
-	  $bdd->query('insert into apourrecette (idaliment, idrecette) VALUES('.$idaliment.', '.$idrecette.');');
+	  $bdd->query('insert ignore into apourrecette (idaliment, idrecette) VALUES('.$idaliment.', '.$idrecette.');');
 
 	}
 	
@@ -429,34 +429,41 @@ try
 	  $pere = $bdd->query('select p.id_SuperCat as idaliment' 
 	   .' from parent p'
 	   .' where p.idAliment= "'.$idaliment.'"');
-		echo 'je suis dans getpere';
 	  return $pere;    
 	  }
 
 	function getToutesLesrecettes() {
 	  $bdd = getBdd();
+	  echo 'connexion reussie<br>';
 	  $liste_toutes_les_recettes = $bdd->query('select r.idRecette as idrecette' 
 	   .' from recette r');
-
+	  echo 'lecture toutes les recettes<br>';
 	  // on va parcourir toutes les recettes et pour chaque composant de la recette on l'ajoute à la table AlimentEstDansRecette
 	  foreach ($liste_toutes_les_recettes as $recette) {
+	  	echo 'recette:'.$recette['idrecette'].'<br>';
 		$aliments_contenus = getCompositionRecette($recette['idrecette']);
+		// foreach ($aliments_contenus as $composant)
+	 //  		echo 'compo:'.$composant['idrecette'].'<br>';
+
 		foreach ($aliments_contenus as $composant) {
 		  $idrecette = $composant['idrecette'];
 		  $idaliment = $composant['idaliment'];
 		  insertIgnoreDansAlimentEstDansRecette($composant['idaliment'], $idrecette);
 		  // Tant qu'on trouvera un père pour aliment on enregistrera aussi
 		  $idaliment = getPere($idaliment);
-		  while(count($idaliment) > 0){
-			insertIgnoreDansAlimentEstDansRecette($idaliment['idaliment'], $idrecette);
-			$idaliment = getPere($idaliment);        
+		  while($idaliment->rowCount() > 0){
+		  	foreach ($idaliment as $id){
+			insertIgnoreDansAlimentEstDansRecette($id['idaliment'], $idrecette);
+			$idaliment = getPere($id['idaliment']);
+			}
 		  }
 		}
 	  }
 
-	  return $liste_toutes_les_recettes;
+	 //return $liste_toutes_les_recettes;
 	}
 	getToutesLesrecettes();
+	echo "Insertion des valeurs dans Contient réussit<br>";
 }
 catch(PDOException $e)
 {
