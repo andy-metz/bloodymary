@@ -460,7 +460,7 @@ try
 	 //return $liste_toutes_les_recettes;
 	}
 	//getToutesLesrecettes();
-	echo "Insertion des valeurs dans APOURRECETTE réussit<br>";
+	
 }
 catch(PDOException $e)
 {
