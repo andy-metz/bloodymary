@@ -470,7 +470,7 @@ $conn = null;
 ?>
 <?php
 //============================//
-//																	  //
+//															  //
 // Supression de la base de donnée myDBPDO //
 //																 	  //
 //============================//
@@ -487,7 +487,7 @@ try
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
 	$sql="DROP DATABASE myDBPDO";
-	//$conn->exec($sql);
+	$conn->exec($sql);
 	echo "Database supprimée";
 }	
 	
