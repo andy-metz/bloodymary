@@ -13,7 +13,7 @@ if(isset($_POST['favori']) && $_POST['favori']!="")
 	}
 	else
 	{ // mettre à jour la table favoris
-		
+		supprimerFavoris();
 	}
 	$message_confirmation = $_POST['favori']." a été retiré de la liste de vos favoris";
 
