@@ -75,6 +75,44 @@
 			$elementIncorrect = "prenom";
 		}
 		
+		if(isset($_POST["sexe"]))
+		{
+			if($_POST["sexe"] == 'Femme')
+				$elementCorrect = "Femme";
+			elseif($_POST["sexe"] == 'Homme')
+				$elementCorrect = "Homme";
+			else
+			{
+				$erreur == true;
+				$elementIncorrect = "sexe";
+			}	
+		}
+		else
+		{
+			$erreur == true;
+			$elementIncorrect = "sexe";
+		}
+		
+		if($_POST["dateNaissance"] != null)
+		{
+			$jour =0;
+			$mois = 0;
+			$annee = 0;
+			list($annee, $mois, $jour) = explode("-", $_POST["dateNaissance"]);
+			if(checkdate($mois, $jour, $annee))
+				$elementCorrect = "\$dateNaissance";
+			else
+			{
+				$erreur == true;
+				$elementIncorrect = "dateNaissance";
+			}
+		}
+		else
+		{
+			$erreur == true;
+			$elementIncorrect = "naissance";
+		}	
+		
 		if($_POST["adresse"] != null)
 		{
 			if(preg_match("#^[0-9]{1,2} [' '] [a-z]* [' '] [A-Z]? [a-z]*#", $_POST["adresse"]) == 1)

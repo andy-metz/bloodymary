@@ -52,7 +52,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s2">
-					// <label>Date Naissance</label><br>
+					<label>Date Naissance</label><br>
 					<input type="date" name="dateNaissance"
 						   value="<?php echo (isset($_POST['dateNaissance'])?$_POST['dateNaissance']:null); ?>">
 				</div>
